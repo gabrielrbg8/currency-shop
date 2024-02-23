@@ -1,0 +1,668 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Doc's",
+        "description": "This is a sample API documentation. Edit for your project!.",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "apiteam@swagger.io"
+        },
+        "license": {
+            "name": "Bolierplate docs",
+            "url": "http://google.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://baseurl/api",
+            "description": "CurrencyShop Laravel API"
+        }
+    ],
+    "paths": {
+        "/signup": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User signup",
+                "operationId": "a778edb2d626b6c3919ef993f3ae62c8",
+                "requestBody": {
+                    "description": "Signup request payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unprocessable"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Internal Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User login",
+                "operationId": "9ed68ab219189892d8dd6f09bc72ee3c",
+                "requestBody": {
+                    "description": "Login request payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RequestException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Internal Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/currency": {
+            "get": {
+                "tags": [
+                    "Currency"
+                ],
+                "summary": "Get all currencies",
+                "operationId": "f541166d4838d1829603685b7cd3d11a",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CurrencyResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Internal Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get all transactions",
+                "operationId": "687bd1aa12d27d9fc03b8b606647672a",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter transactions. Use the format filter[field_name].",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Filter fields",
+                                    "properties": {
+                                        "field_name": {
+                                            "type": "string",
+                                            "enum": [
+                                                "total_amount",
+                                                "amount",
+                                                "from_currency",
+                                                "to_currency"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionResource"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Internal Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Create a new transaction",
+                "operationId": "f620122ef953f4480c4449cf322abb5c",
+                "requestBody": {
+                    "description": "Transaction data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionCreate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unprocessable"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "message": "Internal Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ConflictException": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CurrencyResponse": {
+                "title": "Currency",
+                "description": "Currency resource representation",
+                "properties": {
+                    "code": {
+                        "title": "Currency Code",
+                        "description": "Currency code (e.g., USD)",
+                        "type": "string"
+                    },
+                    "codein": {
+                        "title": "Currency Codein",
+                        "description": "Currency codein (e.g., BRL)",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Currency Name",
+                        "description": "Currency name (e.g., Dólar Americano/Real Brasileiro)",
+                        "type": "string"
+                    },
+                    "high": {
+                        "title": "High",
+                        "description": "Highest exchange rate",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "low": {
+                        "title": "Low",
+                        "description": "Lowest exchange rate",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "varBid": {
+                        "title": "Bid Variation",
+                        "description": "Bid variation",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "pctChange": {
+                        "title": "Percentage Change",
+                        "description": "Percentage change",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "bid": {
+                        "title": "Bid",
+                        "description": "Bid price",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "ask": {
+                        "title": "Ask",
+                        "description": "Ask price",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "timestamp": {
+                        "title": "Timestamp",
+                        "description": "Currency timestamp",
+                        "type": "string"
+                    },
+                    "create_date": {
+                        "title": "Create Date",
+                        "description": "Currency creation date",
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Currency"
+                }
+            },
+            "Links": {
+                "title": "Links",
+                "description": "Links for list endpoints",
+                "properties": {
+                    "first": {
+                        "title": "First Page URL",
+                        "type": "string",
+                        "example": "http://localhost:8989/api/transactions?filter%5Bfrom_currency%5D=XXT&page%5Bnumber%5D=1"
+                    },
+                    "last": {
+                        "title": "Last Page URL",
+                        "type": "string",
+                        "example": "http://localhost:8989/api/transactions?filter%5Bfrom_currency%5D=XXT&page%5Bnumber%5D=1"
+                    },
+                    "prev": {
+                        "title": "Previous Page URL",
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "next": {
+                        "title": "Next Page URL",
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Links"
+                }
+            },
+            "Meta": {
+                "title": "Meta",
+                "description": "Meta information for list endpoints",
+                "properties": {
+                    "current_page": {
+                        "title": "Current Page",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "per_page": {
+                        "title": "Items Per Page",
+                        "type": "integer",
+                        "example": 30
+                    },
+                    "total": {
+                        "title": "Total Items",
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "total_pages": {
+                        "title": "Total Pages",
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Meta"
+                }
+            },
+            "MetaLinks": {
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "example": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "RequestException": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "example": []
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionCreate": {
+                "title": "TransactionCreate",
+                "description": "Transaction creation request body",
+                "properties": {
+                    "from_currency": {
+                        "title": "From Currency",
+                        "description": "Currency to convert from",
+                        "type": "string"
+                    },
+                    "to_currency": {
+                        "title": "To Currency",
+                        "description": "Currency to convert to",
+                        "type": "string"
+                    },
+                    "amount": {
+                        "title": "Amount",
+                        "description": "Amount to convert",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "TransactionCreate"
+                }
+            },
+            "TransactionResource": {
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/TransactionResponse"
+                    },
+                    "statusCode": {
+                        "type": "integer",
+                        "example": "integer"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/Meta"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/Links"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionResponse": {
+                "title": "Transaction",
+                "description": "Transaction resource representation",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "Transaction ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "user_id": {
+                        "title": "User ID",
+                        "description": "User ID associated with the Transaction",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "from_currency": {
+                        "title": "From Currency",
+                        "description": "Currency to convert from",
+                        "type": "string"
+                    },
+                    "to_currency": {
+                        "title": "To Currency",
+                        "description": "Currency to convert to",
+                        "type": "string"
+                    },
+                    "amount": {
+                        "title": "Amount",
+                        "description": "Amount to convert",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "service_fee": {
+                        "title": "Service Fee",
+                        "description": "Service fee applied",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "total_amount": {
+                        "title": "Total Amount",
+                        "description": "Total amount after conversion",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "created_at": {
+                        "title": "Created At",
+                        "description": "Transaction creation timestamp",
+                        "type": "string",
+                        "example": "2024-02-23 22:08:55"
+                    },
+                    "updated_at": {
+                        "title": "Updated At",
+                        "description": "Transaction update timestamp",
+                        "type": "string",
+                        "example": "2024-02-23 22:08:55"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Transaction"
+                }
+            },
+            "Unprocessable": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "example": {
+                            "field_name": [
+                                "The 'field name' field is required.",
+                                "..."
+                            ]
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UserResponse": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "token": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
