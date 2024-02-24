@@ -229,25 +229,18 @@
                     {
                         "name": "filter",
                         "in": "query",
-                        "description": "Filter transactions. Use the format filter[field_name].",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "description": "Filter fields",
-                                    "properties": {
-                                        "field_name": {
-                                            "type": "string",
-                                            "enum": [
-                                                "total_amount",
-                                                "amount",
-                                                "from_currency",
-                                                "to_currency"
-                                            ]
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "total_amount",
+                                    "amount",
+                                    "from_currency",
+                                    "to_currency"
+                                ]
+                            },
+                            "example": "filter[to_currency]='USD'"
                         }
                     }
                 ],
@@ -522,11 +515,6 @@
                 "title": "TransactionCreate",
                 "description": "Transaction creation request body",
                 "properties": {
-                    "from_currency": {
-                        "title": "From Currency",
-                        "description": "Currency to convert from",
-                        "type": "string"
-                    },
                     "to_currency": {
                         "title": "To Currency",
                         "description": "Currency to convert to",

@@ -70,11 +70,13 @@ class TransactionController
      *      @OA\Parameter(
      *          in="query",
      *          name="filter",
-     *          description="Filter transactions. Use the format filter[field_name].",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              description="Filter fields",
-     *              @OA\Property(property="field_name", type="string", enum={"total_amount", "amount", "from_currency", "to_currency"})
+     *          @OA\Schema(
+     *              type="array",
+     *              example="filter[to_currency]='USD'",
+     *              @OA\Items(
+     *                  type="string",
+     *                  enum={"total_amount", "amount", "from_currency", "to_currency"},
+     *              )
      *          )
      *      ),
      *      @OA\Response(

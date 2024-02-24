@@ -35,8 +35,8 @@ class TransactionService
      */
     public function store(array $data, User $user)
     {
-        $currencyInfo = $this->currencyService->getAll($data['from_currency'], $data['to_currency']);
-        $bid = $currencyInfo[strtoupper($data['to_currency'].$data['from_currency'])]['bid'];
+        $currencyInfo = $this->currencyService->getAll($data['to_currency']);
+        $bid = $currencyInfo[strtoupper($data['to_currency'] . 'BRL')]['bid'];
         $totalAmount = $this->calculateTotalAmount($data['amount'], $bid);
 
         $serviceFee = $this->calculateServiceFee($totalAmount);
@@ -45,7 +45,7 @@ class TransactionService
 
         $this->validateMinimumPurchaseAmount($totalAmountWithFee);
 
-        return $this->transactionRepository->create(array_merge($data, ['exchange_rate' => $bid, 'user_id' => $user->id, 'service_fee' => $serviceFee, 'total_amount' => $totalAmountWithFee]));
+        return $this->transactionRepository->create(array_merge($data, ['from_currency' => 'BLR', 'exchange_rate' => $bid, 'user_id' => $user->id, 'service_fee' => $serviceFee, 'total_amount' => $totalAmountWithFee]));
     }
 
     public function calculateTotalAmount(float $amount, float $bid): float

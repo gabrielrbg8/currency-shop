@@ -14,7 +14,6 @@ class TransactionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'from_currency' => 'required|string|in:BRL',
             'to_currency' => 'required|string',
             'amount' => 'required|numeric|min:0.01',
         ];

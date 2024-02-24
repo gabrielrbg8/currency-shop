@@ -17,14 +17,6 @@ class TransactionCreate
 {
     /**
      * @OA\Property(
-     *     title="From Currency",
-     *     description="Currency to convert from",
-     * )
-     */
-    public string $from_currency;
-
-    /**
-     * @OA\Property(
      *     title="To Currency",
      *     description="Currency to convert to",
      * )

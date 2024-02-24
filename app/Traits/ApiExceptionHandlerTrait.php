@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
@@ -29,7 +30,7 @@ trait ApiExceptionHandlerTrait
             return $this->generateResponse('Resource not found', Response::HTTP_NOT_FOUND);
         } elseif ($exception instanceof MethodNotAllowedHttpException) {
             return $this->generateResponse('Method not allowed', Response::HTTP_METHOD_NOT_ALLOWED);
-        } elseif ($exception instanceof AuthenticationException) {
+        } elseif ($exception instanceof AuthenticationException || $exception instanceof UnauthorizedHttpException) {
             return $this->generateResponse('Unauthenticated', Response::HTTP_UNAUTHORIZED);
         } elseif ($exception instanceof ValidationException) {
             return $this->handleValidationException($exception);

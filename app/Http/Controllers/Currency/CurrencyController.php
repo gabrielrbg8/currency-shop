@@ -19,8 +19,8 @@ class CurrencyController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request, $fromCurrency, $toCurrency)
+    public function index(Request $request, $currency)
     {
-        return response()->json($this->currencyService->getAll($fromCurrency, $toCurrency), Response::HTTP_OK);
+        return response()->json($this->currencyService->getAll($currency), Response::HTTP_OK);
     }
 }
