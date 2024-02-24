@@ -54,6 +54,12 @@ REDIS_PORT=6379
        docker exec -it "container_name" bash
     php artisan key:generate
     ```
+- Inside the laravel container, make JWT secret key:
+
+    ```dosini
+       docker exec -it "container_name" bash
+    php artisan jwt:secret
+    ```
     
 - To run tests:
     ```dosini
