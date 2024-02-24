@@ -1,5 +1,5 @@
-### Laravel 9 CurrencyShop
-###### A CurrencyShop to easily start your Laravel projects!
+### Laravel 9 API REST - CurrencyShop
+###### API simulating a CurrencyShop, with currency conversions based on API: https://docs.awesomeapi.com.br/api-de-moedas
 
 #### Stack
 ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
@@ -70,5 +70,10 @@ This project is currently extended with the following packages and services. Ins
 
 | Package  | Docs |
 | ------------- | ------------- |
-|  L5-Swagger OpenAPI  | https://github.com/DarkaOnLine/L5-Swagger/  |
-|  L5 Repository  | https://github.com/andersao/l5-repository  |
+| Package                        | Documentation Link                             |
+| ------------------------------ | ---------------------------------------------- |
+| L5-Swagger OpenAPI             | [GitHub](https://github.com/DarkaOnLine/L5-Swagger/) |
+| L5 Repository                  | [GitHub](https://github.com/andersao/l5-repository) |
+| JSON API Paginate              | [GitHub](https://github.com/cloudcreativity/laravel-json-api-paginate) |
+| Tymon JWT Auth                 | [GitHub](https://github.com/tymondesigns/jwt-auth) |
+| Spatie Query Builder           | [Documentation](https://spatie.be/docs/laravel-query-builder) |
