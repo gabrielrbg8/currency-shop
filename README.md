@@ -55,7 +55,7 @@ REDIS_PORT=6379
     php artisan key:generate
     ```
     
-- Inside the laravel container, run migrations key:
+- Inside the laravel container, run migrations:
 
     ```dosini
        docker exec -it "container_name" bash
